@@ -3,8 +3,6 @@
 namespace App\Activities;
 
 use App\Abstracts\ActivityAbstract;
-use App\Models\User;
-use Illuminate\Support\Facades\Log;
 use Telegram\Bot\Laravel\Facades\Telegram;
 use Telegram\Bot\Objects\Update;
 
@@ -18,13 +16,17 @@ class StartActivity extends ActivityAbstract
 
     public function execute(Update $updates): void
     {
-        User::factory()->create();
+        $textData = [
+            'userName' => $updates->message->from->username . $updates->message->from->lastName,
+            'userId' => $updates->message->from->id,
+        ];
 
-        Log::info($updates['message']);
+        $text = view('activities.start', $textData)->render();
 
         Telegram::sendMessage([
-            'chat_id' => $updates['message']['chat']['id'],
-            'text' => 'Hello, I\'m a bot. I can help you with your tasks.',
+            'chat_id' => $updates->message->chat->id,
+            'text' => $text,
+            'parse_mode' => 'HTML',
         ]);
     }
 }
