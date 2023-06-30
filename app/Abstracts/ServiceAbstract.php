@@ -13,9 +13,16 @@ abstract class ServiceAbstract
 
     public function start(): void
     {
-        foreach ($this->getActivities() as $activity) {
-            $activity->run($this->updates);
+        foreach ($this->filterActivity() as $activity) {
+            $activity->execute($this->updates);
         }
+    }
+
+    public function filterActivity(): array
+    {
+        return array_filter($this->getActivities(), function ($activity) {
+            return $activity->itCanRun($this->updates);
+        });
     }
 
     abstract protected function getActivities();

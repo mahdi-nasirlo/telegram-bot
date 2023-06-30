@@ -7,9 +7,13 @@ use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use Telegram\Bot\Laravel\Facades\Telegram;
 
-class BootActivity extends ActivityAbstract
+class StartActivity extends ActivityAbstract
 {
-    protected array|string|null $commands;
+    protected $commands = [
+        '/start',
+        'پنل',
+        'panel',
+    ];
 
     public function execute($updates): void
     {
