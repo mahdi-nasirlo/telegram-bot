@@ -1,18 +1,16 @@
 <?php
 
-use App\Workflows\BootBotWorkflow;
+use App\Services\BootBotService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Workflow\WorkflowStub;
+use Telegram\Bot\Laravel\Facades\Telegram;
 
 
-Route::get('/webhook', function (Request $request) {
-    $workflow = WorkflowStub::make(BootBotWorkflow::class);
+Route::post('/webhook', function (Request $request) {
+
+    $updates = Telegram::getWebhookUpdate();
+
+    $workflow = new BootBotService($updates);
 
     $workflow->start();
-
-    return response()->json([
-        'id' => $workflow->id(),
-        'status' => $workflow->status()
-    ]);
 });
