@@ -12,6 +12,9 @@ abstract class ActivityAbstract
             abort(505);
         }
 
+        if (!isset($update->message))
+            return false;
+
         if (is_array($this->commands) && in_array($update->message->text, $this->commands))
             return true;
 
