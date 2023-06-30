@@ -6,6 +6,7 @@ use App\Abstracts\ActivityAbstract;
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use Telegram\Bot\Laravel\Facades\Telegram;
+use Telegram\Bot\Objects\Update;
 
 class StartActivity extends ActivityAbstract
 {
@@ -15,7 +16,7 @@ class StartActivity extends ActivityAbstract
         'panel',
     ];
 
-    public function execute($updates): void
+    public function execute(Update $updates): void
     {
         User::factory()->create();
 
