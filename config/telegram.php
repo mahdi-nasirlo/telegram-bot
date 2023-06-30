@@ -33,6 +33,7 @@ return [
     'bots' => [
         'mybot' => [
             'user_name' => env('TELEGRAM_BOT_USER_NAME', 'YOUR-BOT-NAME'),
+            'group_support_url' => env('TELEGRAM_BOT_GROUP_SUPPORT_URL', 'YOUR-BOT-GROUP-SUPPORT-URL'),
             'token' => env('TELEGRAM_BOT_TOKEN'),
             'certificate_path' => env('TELEGRAM_CERTIFICATE_PATH', 'YOUR-CERTIFICATE-PATH'),
             'webhook_url' => env('TELEGRAM_WEBHOOK_URL', 'YOUR-BOT-WEBHOOK-URL'),
